@@ -1,0 +1,1 @@
+CREATE DATABASE archi_ynov_vente_stripe;
