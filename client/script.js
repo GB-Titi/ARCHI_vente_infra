@@ -52,16 +52,30 @@ function checkout() {
     .catch((e) => console.error(e.error));
 };
 
+const articleList = document.getElementById('articleList')
 
-function populateArticles() {
+async function populateArticles() {
   //BDD fetch
-  const articleList = document.getElementById('articleList')
-  //BDD convert to obj
-  
-  articleList.innerHTML += `<section class="product">
-  <h2>${label}</h2>
-  <p>${ref}</p>
-  <button onclick="addToCart(${id})">Ajouter au panier</button>
-</section>
-`
+  await fetch("http://localhost:8080/api/articles")
+    .then((res) => {
+      return res.json();
+    })
+    .then((articles) => {
+      console.log(articles);
+      for (article of articles) {
+        articleList.innerHTML += `<section class="product">
+        <h2>${article.label}</h2>
+        <p>${article.ref}</p>
+        <p>${article.price}</p>
+        <button onclick="addToCart(${article.id})">Ajouter au panier</button>
+      </section>
+      `
+      }
+    })
+    .catch((e) => console.error(e.error))
+
+
+
 }
+
+populateArticles()
