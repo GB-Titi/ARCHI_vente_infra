@@ -1,0 +1,16 @@
+body {
+    font-family: sans-serif;
+  }
+  
+  .articleList {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    grid-column-gap: 8px;
+    grid-row-gap: 8px;
+  }
+  
+  .product {
+    border: solid 1px;
+  }
+  
