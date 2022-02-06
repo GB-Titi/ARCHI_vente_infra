@@ -4,13 +4,53 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+
+    <script type="test/javascript" src="./script.js "></script>
+
+    <title>Vente : Front</title>
 </head>
 <body>
-    <h1>
-        hello
-    </h1>
-    <button>Checkout</button>
+    <h1>Archi-bonne vente</h1>
+    <header>Articles</header>
+    <main>
+      <article class="articleList">
+        <section class="product">
+          <h2>article</h2>
+          <p>description</p>
+          <button onclick="addToCart(1)">Ajouter au panier</button>
+        </section>
+
+        <section class="product">
+          <h2>article</h2>
+          <p>description</p>
+          <button  onclick="addToCart(2)">Ajouter au panier</button>
+        </section>
+
+        <section class="product">
+          <h2>article</h2>
+          <p>description</p>
+          <button onclick="addToCart(3)">Ajouter au panier</button>
+        </section>
+
+        <section class="product">
+          <h2>article</h2>
+          <p>description</p>
+          <button onclick="addToCart(4)">Ajouter au panier</button>
+        </section>
+
+        <section class="product">
+          <h2>article</h2>
+          <p>description</p>
+          <button  onclick="addToCart(5)">Ajouter au panier</button>
+        </section>
+      </article>
+
+      <article id='panier'>
+        <h2>panier</h2>
+      </article>
+
+    <button onclick="checkout()">Checkout</button>
     <script src="script.js"></script>
 </body>
 </html>
