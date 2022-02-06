@@ -18,6 +18,7 @@ app.use((req, res, next) => {
     next();
 });
 
+console.log(process.env.STRIPE_PRIVATE_KEY,process.env.STRIPE_PRIVATE_KEY);
 //Notre STORE
 const storeItems = new Map(
     [
@@ -64,4 +65,13 @@ app.post('/create-checkout-session', async (req, res) => {
         })
     }
 })
+
+require("./routes/article.routes.js")(app);
+const PORT = process.env.PORT || 8080;
+
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}.`);
+  });
+  
+
 module.exports = app;
