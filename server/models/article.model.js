@@ -22,7 +22,7 @@ Article.getAll = (title, result) => {
             return;
         }
 
-        console.log("articles: ", res);
+        // console.log("articles: ", res);
         result(null, res);
     });
 };

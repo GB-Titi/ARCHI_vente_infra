@@ -1,11 +1,14 @@
 require('dotenv').config()
 
+const sql = require("./models/db.js");
+
 const express = require('express');
 const app = express();
 const cors = require('cors')
 app.use( cors({
-    origin: 'http://localhost:5500'
+    origin: '*'
 }))
+
 
 app.use(express.json());
 
@@ -22,13 +25,19 @@ console.log(process.env.STRIPE_PRIVATE_KEY,process.env.STRIPE_PRIVATE_KEY);
 //Notre STORE
 const storeItems = new Map(
     [
-        [1, {
-            priceInCents: 10000,
-            name: 'Rick A.'
+        [1,  {
+            "id": 1,
+            "label": "t-shirt",
+            "img": "https://tommy-europe.scene7.com/is/image/TommyEurope/KG0KG03705_123_alternate1?$main$",
+            "ref": "SHIRT1W",
+            "price": 1499
         }],
         [2, {
-            priceInCents: 2000,
-            name: 'Never gonna give you up'
+            "id": 2,
+            "label": "pantalon",
+            "img": "https://www.procouteaux.com/716-large_default/pantalon-de-cuisine-pantastyle-kentaur.jpg",
+            "ref": "PTL1B",
+            "price": 3499
         }],
     ]
 )
@@ -41,13 +50,14 @@ app.post('/create-checkout-session', async (req, res) => {
             mode: 'payment',
             line_items: req.body.items.map(item => {
                 const storeItem = storeItems.get(item.id)
+
                 return {
                     price_data: {
                         currency: 'eur',
                         product_data: {
-                            name: storeItem.name
+                            name: storeItem.label
                         },
-                        unit_amount: storeItem.priceInCents
+                        unit_amount: storeItem.price
                     },
                     quantity: item.quantity
                 }
@@ -65,6 +75,21 @@ app.post('/create-checkout-session', async (req, res) => {
         })
     }
 })
+
+  function fetchArticleData(id) {
+    let query = `SELECT * FROM products`;
+
+    sql.query(query, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(null, err);
+            return;
+        }
+
+        // console.log("articles: ", res);
+        result(null, res);
+    });
+}
 
 require("./routes/article.routes.js")(app);
 const PORT = process.env.PORT || 8080;

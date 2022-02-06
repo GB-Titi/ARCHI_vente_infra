@@ -63,10 +63,11 @@ async function populateArticles() {
     .then((articles) => {
       console.log(articles);
       for (article of articles) {
+        const priceInEuro = article.price/100
         articleList.innerHTML += `<section class="product">
         <h2>${article.label}</h2>
         <p>${article.ref}</p>
-        <p>${article.price}</p>
+        <p>${priceInEuro}</p>
         <button onclick="addToCart(${article.id})">Ajouter au panier</button>
       </section>
       `
